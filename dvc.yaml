@@ -1,0 +1,14 @@
+stages:
+  train_data:
+    cmd: python train_data.py
+    deps:
+    - haberman_processed.csv
+    - train_data.py
+    outs:
+    - final_model.sav
+    params:
+    - cv
+    - solver
+    metrics:
+    - metrics.json:
+        cache: false
