@@ -13,8 +13,8 @@ import pickle
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
-
-df = pd.read_csv('haberman_processed.csv', index_col=0)
+filename = 'haberman_processed.csv'
+df = pd.read_csv(filename, index_col=0)
 
 y = df.pop('class').to_numpy()
 
