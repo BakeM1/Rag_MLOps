@@ -26,12 +26,9 @@ stages:
   train_data:
     cmd: python train_data.py
     deps:
-    - path: haberman_processed.csv
-      md5: f4187b5e2d213d442bde7b3274cb9f68
-      size: 4545
     - path: train_data.py
-      md5: 4f62254afd947774faf7681cc3f37192
-      size: 1410
+      md5: 4fb906cbe085d5d079756d9ca139de0d
+      size: 1429
     params:
       params.yaml:
         cv: 5
