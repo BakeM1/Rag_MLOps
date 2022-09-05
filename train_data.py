@@ -14,9 +14,18 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
 
+import os
+import wget
+
+#defining the url of the file
+url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/haberman.csv"
+
+filename = wget.download(url)
+
 import pandas as pd
 import numpy as np
 from sklearn import preprocessing
+
 
 filename = 'haberman.csv'
 columns = ['age', 'year', 'node', 'class']
