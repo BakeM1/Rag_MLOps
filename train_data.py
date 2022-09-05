@@ -18,9 +18,31 @@ import os
 import wget
 
 #defining the url of the file
-url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/haberman.csv"
+#url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/haberman.csv"
 
-filename = wget.download(url)
+#filename = wget.download(url)
+
+import subprocess
+import sys
+
+
+
+os.system('pip install boto3')
+
+import boto3
+import botocore
+
+BUCKET_NAME = 'mlopsfilesdvc' # replace with your bucket name
+KEY = 'haberman.csv' # replace with your object key
+
+#s3 = boto3.resource('s3')
+
+s3 = boto3.resource('s3',
+         aws_access_key_id='AKIAWUFQFXJL6WAJHASG',
+         aws_secret_access_key= 'Df/OBvp7FJeg6ZtM3X2keynE7w1412/VNEBuDehI')
+
+filename=s3.Bucket(BUCKET_NAME).download_file(KEY, 'haberman.csv')
+print(filename)
 
 import pandas as pd
 import numpy as np
