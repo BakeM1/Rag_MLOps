@@ -27,8 +27,8 @@ stages:
     cmd: python train_data.py
     deps:
     - path: train_data.py
-      md5: 4fb906cbe085d5d079756d9ca139de0d
-      size: 1429
+      md5: 606cc1ffbe34f2cf11f0346561ea4975
+      size: 1816
     params:
       params.yaml:
         cv: 6

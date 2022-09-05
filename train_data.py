@@ -13,8 +13,21 @@ import pickle
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
-filename = 'haberman_processed.csv'
-df = pd.read_csv(filename, index_col=0)
+
+import pandas as pd
+import numpy as np
+from sklearn import preprocessing
+
+filename = 'haberman.csv'
+columns = ['age', 'year', 'node', 'class']
+df = pd.read_csv(filename, header=None, names=columns)
+labelEncoder = preprocessing.LabelEncoder()
+#Encode the class column into 0 and 1
+df['class'] = labelEncoder.fit_transform(df['class'])
+df.to_csv("haberman_processed.csv")
+
+filename2 = 'haberman_processed.csv'
+df = pd.read_csv(filename2, index_col=0)
 
 y = df.pop('class').to_numpy()
 
