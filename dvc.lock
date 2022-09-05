@@ -27,16 +27,16 @@ stages:
     cmd: python train_data.py
     deps:
     - path: train_data.py
-      md5: 145cc542059d4d825e47e37348c373a8
-      size: 1410
+      md5: 9a629561ef6fef582dc12b1ce2ce1d47
+      size: 2491
     params:
       params.yaml:
         cv: 5
         solver: liblinear
     outs:
     - path: final_model.sav
-      md5: d497f77ef6d6cb8c24da16fc2a9ede3a
-      size: 132
+      md5: 7b973198e7f14f04c546e3167d3ec922
+      size: 223
     - path: metrics.json
-      md5: 8923e1773e2e9b130a9e962dbe3fc80d
-      size: 72
+      md5: 5a0c41369fb24ac176368bf63fd8622e
+      size: 102

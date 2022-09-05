@@ -13,8 +13,52 @@ import pickle
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 
-filename='haberman_processed.csv'
-df = pd.read_csv(filename, index_col=0)
+
+import os
+import wget
+
+#defining the url of the file
+#url = "https://raw.githubusercontent.com/jbrownlee/Datasets/master/haberman.csv"
+
+#filename = wget.download(url)
+
+import subprocess
+import sys
+
+
+
+os.system('pip install boto3')
+
+import boto3
+import botocore
+
+BUCKET_NAME = 'mlopsfilesdvc' # replace with your bucket name
+KEY = 'haberman.csv' # replace with your object key
+
+#s3 = boto3.resource('s3')
+
+s3 = boto3.resource('s3',
+         aws_access_key_id='AKIAWUFQFXJL6WAJHASG',
+         aws_secret_access_key= 'Df/OBvp7FJeg6ZtM3X2keynE7w1412/VNEBuDehI')
+
+filename=s3.Bucket(BUCKET_NAME).download_file(KEY, 'haberman.csv')
+print(filename)
+
+import pandas as pd
+import numpy as np
+from sklearn import preprocessing
+
+
+filename = 'haberman.csv'
+columns = ['age', 'year', 'node', 'class']
+df = pd.read_csv(filename, header=None, names=columns)
+labelEncoder = preprocessing.LabelEncoder()
+#Encode the class column into 0 and 1
+df['class'] = labelEncoder.fit_transform(df['class'])
+df.to_csv("haberman_processed.csv")
+
+filename2 = 'haberman_processed.csv'
+df = pd.read_csv(filename2, index_col=0)
 
 y = df.pop('class').to_numpy()
 
@@ -24,8 +68,8 @@ X = Normalizer().fit_transform(X)
 
 #Using a Logistic Regression in production
 #clf = LogisticRegression(solver=yaml.safe_load(open('params.yaml'))['solver'])
-clf = MultinomialNB()
-#clf = LinearDiscriminantAnalysis()
+#clf = MultinomialNB()
+clf = LinearDiscriminantAnalysis()
 y_pred = cross_val_predict(clf, X, y, cv = yaml.safe_load(open('params.yaml'))['cv'])
 
 # Metrics for comparing performance bw models
